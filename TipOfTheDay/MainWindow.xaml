@@ -6,11 +6,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TipOfTheDay"
         BorderThickness="1"
-        BorderBrush="gray"               
+        BorderBrush="gray"  
+                       ShowTitleBar="False"
+                       ShowMaxRestoreButton="False"
         mc:Ignorable="d"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="276.501" Width="525">
     <Grid>
-        <Label Content="{Binding TheTip}"/>
+        <TextBox Text="{Binding TheTip}" Margin="10,133,10,0" Height="82" VerticalAlignment="Top"
+                 VerticalScrollBarVisibility="Auto" 
+                 TextWrapping="Wrap" AcceptsReturn="True"
+                 />
+
+        <Button x:Name="button" Content="Next" HorizontalAlignment="Left" Margin="421,236,0,-18" Width="75" Height="27" VerticalAlignment="Top" Command="{Binding Refresh}"/>
+        <Button x:Name="button1" Content="Prevous" HorizontalAlignment="Left" Margin="320,236,0,-18" Width="75" Command="{Binding Refresh}" Height="27" VerticalAlignment="Top"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="123" Margin="10,10,0,0" VerticalAlignment="Top" Width="111" Source="img/a.jpg"/>
+        <Label x:Name="label" Content="Tip of the day" HorizontalAlignment="Left" Margin="142,36,0,0" VerticalAlignment="Top" FontSize="48" Controls:ControlsHelper.ContentCharacterCasing="Upper" FontFamily="Metro" Width="354" />
     </Grid>
 </Controls:MetroWindow>

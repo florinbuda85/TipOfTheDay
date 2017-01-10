@@ -1,4 +1,8 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.Windows;
+using System.Windows.Input;
 
 namespace TipOfTheDay.ViewModel
 {
@@ -21,7 +25,7 @@ namespace TipOfTheDay.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            TheTip = TipManager.getInstance().getRandomTip();
+            RefreshExecute();
         }
 
         #region TheTip
@@ -40,7 +44,33 @@ namespace TipOfTheDay.ViewModel
         }
         #endregion
 
-
+        #region Refresh
+        private ICommand _refresh;
+        public ICommand Refresh
+        {
+            get
+            {
+                if (_refresh == null)
+                {
+                    _refresh = new RelayCommand(RefreshExecute);
+                }
+                return _refresh;
+            }
+        }
+        private void RefreshExecute()
+        {
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+            try
+            {
+                TheTip = TipManager.getInstance().getRandomTip();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception found on RefreshExecute :" + ex.Message);
+            }
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
+        }
+        #endregion
 
     }
 }
