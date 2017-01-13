@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,9 +29,7 @@ namespace TipOfTheDay
          
         public string getRandomTip()
         {
-            string dir = @"D:\Gdrive\Proiecte in desfasurare\09_Randoms\randoms";
-
-            var files = from file in Directory.EnumerateFiles(dir, "*.txt", SearchOption.AllDirectories)
+            var files = from file in Directory.EnumerateFiles(Properties.Settings.Default.sourceFolder, "*.txt", SearchOption.AllDirectories)
                         select file;
 
             int fileID = new Random().Next(0, files.Count() - 1);

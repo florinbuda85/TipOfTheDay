@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -24,6 +25,16 @@ namespace TipOfTheDay
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void changeFolder(object sender, RoutedEventArgs e)
+        {
+            var dialog = new FolderBrowserDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Properties.Settings.Default.sourceFolder = dialog.SelectedPath;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }
